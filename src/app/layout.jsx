@@ -16,14 +16,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Aplication CRUD",
-  description: "Projeto gradativo de Front-End em Next.js",
+  title: "Receitinhas da Vovó",
+  description: "Descubra receitas tradicionais com sabor de comida caseira feita com amor",
+  keywords: "receitas, culinária, comida caseira, receitas tradicionais, sobremesas, pratos principais",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-green-50 min-h-screen`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-amber-50 min-h-screen`}>
         <ToastProvider>
           <Header />
           <main className="max-w-5xl mx-auto px-4 py-6">

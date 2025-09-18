@@ -39,17 +39,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-[#ff9f43] text-lg mb-4 font-semibold">Categorias</h4>
-            <ul className="list-none p-0 m-0">
-              <li className="mb-2"><Link href="/?category=entradas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Entradas</Link></li>
-              <li className="mb-2"><Link href="/recipes?category=pratos-principais" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Pratos Principais</Link></li>
-              <li className="mb-2"><Link href="/?category=sobremesas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Sobremesas</Link></li>
-              <li className="mb-2"><Link href="/?category=bebidas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Bebidas</Link></li>
-              <li className="mb-2"><Link href="/?category=lanches" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Lanches</Link></li>
-              <li className="mb-2"><Link href="/?category=massas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Massas</Link></li>
-            </ul>
-          </div>
+
         </div>
         
         <div className="border-t border-gray-200 pt-6 text-center text-sm text-gray-500">
