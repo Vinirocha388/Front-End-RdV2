@@ -50,7 +50,7 @@ export default function Header() {
               </Link>
             </li>
             <li className="m-0 relative">
-              <Link href="/about" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
+              <Link href="/sobre" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
                 <span className="mr-1.5">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -61,13 +61,13 @@ export default function Header() {
               </Link>
             </li>
             <li className="m-0 relative">
-              <Link href="/contact" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
+              <Link href="/recipes" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
                 <span className="mr-1.5">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </span>
-                Contato
+                Receitas
                 <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </Link>
             </li>
@@ -115,7 +115,7 @@ export default function Header() {
                 </li>
                 <li className="m-0 relative">
                   <Link 
-                    href="/about" 
+                    href="/sobre" 
                     onClick={toggleMobileMenu} 
                     className="flex items-center py-4 px-3 text-gray-800 no-underline font-medium text-base rounded-lg transition-colors duration-200 hover:bg-amber-50 group"
                   >
@@ -129,16 +129,16 @@ export default function Header() {
                 </li>
                 <li className="m-0 relative">
                   <Link 
-                    href="/contact" 
+                    href="/characters" 
                     onClick={toggleMobileMenu} 
                     className="flex items-center py-4 px-3 text-gray-800 no-underline font-medium text-base rounded-lg transition-colors duration-200 hover:bg-amber-50 group"
                   >
                     <span className="flex items-center justify-center w-8 h-8 mr-3 text-amber-500 bg-amber-100 rounded-lg transition-colors duration-200 group-hover:bg-amber-200">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
                     </span>
-                    <span>Contato</span>
+                    <span>Receitas</span>
                   </Link>
                 </li>
               </ul>
