@@ -1,58 +1,71 @@
-import React from 'react';
-import Image from 'next/image';
+"use client";
+import Link from 'next/link';
 
-export default function Footer() {
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="relative w-full bg-gradient-to-br from-slate-900 via-emerald-900 to-green-900 text-white py-8 sm:py-12 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(16,185,129,0.1),transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(5,150,105,0.1),transparent_50%)]"></div>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent"></div>
-      <div className="absolute -top-10 sm:-top-20 -right-10 sm:-right-20 w-20 sm:w-40 h-20 sm:h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-10 sm:-bottom-20 -left-10 sm:-left-20 w-20 sm:w-40 h-20 sm:h-40 bg-green-500/10 rounded-full blur-3xl"></div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
-          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
-            <div>
-              <div className="w-24 sm:w-32 h-24 sm:h-32 flex items-center justify-center transform hover:scale-110 transition-transform duration-500">
-                <Image
-                  src="/images/Rick_and_Morty.svg"
-                  alt="Logo Rick and Morty"
-                  width={150}
-                  height={150}
-                  className="drop-shadow-lg"
-                  priority
-                />
-              </div>
-            </div>
-            <div>
-              <div className="text-emerald-200 text-base sm:text-lg font-bold">Rick and Morty CRUD</div>
-              <div className="text-emerald-400/80 text-xs sm:text-sm">© 2024 Todos os direitos reservados</div>
+    <footer className="bg-gray-100 text-gray-800 py-12 pb-6 mt-12 border-t border-gray-200">
+      <div className="max-w-[1200px] mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 className="text-[#ff9f43] text-2xl mb-4 font-bold">Receitinhas da Vovó</h3>
+            <p className="leading-relaxed mb-6 text-gray-700">
+              Compartilhando sabores e memórias através de receitas caseiras tradicionais 
+              que trazem o aconchego e o carinho da cozinha da vovó.
+            </p>
+            <div className="flex gap-4">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-600 text-2xl transition-colors duration-300 hover:text-[#ff9f43]">
+                <i className="fa fa-facebook-square"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-600 text-2xl transition-colors duration-300 hover:text-[#ff9f43]">
+                <i className="fa fa-instagram"></i>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-600 text-2xl transition-colors duration-300 hover:text-[#ff9f43]">
+                <i className="fa fa-youtube-play"></i>
+              </a>
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <div className="text-center">
-              <div className="text-emerald-300 text-xs sm:text-sm font-medium">Desenvolvido com</div>
-              <div className="text-white font-bold flex items-center justify-center mt-1">
-                <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent font-black text-sm sm:text-base">Next.js</span>
-              </div>
-            </div>
-            
-            <div className="hidden sm:block w-px h-8 sm:h-12 bg-gradient-to-b from-transparent via-emerald-500/50 to-transparent"></div>
-            
-            <div className="text-center">
-              <div className="text-emerald-300 text-xs sm:text-sm font-medium">API</div>
-              <div className="text-white font-bold mt-1 text-sm sm:text-base">Rick and Morty</div>
-            </div>
+          <div>
+            <h4 className="text-[#ff9f43] text-lg mb-4 font-semibold">Links Rápidos</h4>
+            <ul className="list-none p-0 m-0">
+              <li className="mb-2"><Link href="/" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Home</Link></li>
+              <li className="mb-2"><Link href="/recipes" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Todas as Receitas</Link></li>
+              <li className="mb-2"><Link href="/about" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Sobre Nós</Link></li>
+              <li className="mb-2"><Link href="/contact" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Contato</Link></li>
+              <li className="mb-2"><Link href="/privacy-policy" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Política de Privacidade</Link></li>
+              <li className="mb-2"><Link href="/terms" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Termos de Uso</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[#ff9f43] text-lg mb-4 font-semibold">Categorias</h4>
+            <ul className="list-none p-0 m-0">
+              <li className="mb-2"><Link href="/?category=entradas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Entradas</Link></li>
+              <li className="mb-2"><Link href="/recipes?category=pratos-principais" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Pratos Principais</Link></li>
+              <li className="mb-2"><Link href="/?category=sobremesas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Sobremesas</Link></li>
+              <li className="mb-2"><Link href="/?category=bebidas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Bebidas</Link></li>
+              <li className="mb-2"><Link href="/?category=lanches" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Lanches</Link></li>
+              <li className="mb-2"><Link href="/?category=massas" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Massas</Link></li>
+            </ul>
           </div>
         </div>
         
-        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-emerald-800/50 text-center">
-          <p className="text-emerald-300/70 text-xs sm:text-sm leading-relaxed px-4">
-            Explore o multiverso de Rick and Morty através desta aplicação interativa
-          </p>
+        <div className="border-t border-gray-200 pt-6 text-center text-sm text-gray-500">
+          <p>&copy; {currentYear} Receitinhas da Vovó - Todos os direitos reservados</p>
+          <p>Feito com <span className="text-[#e74c3c] text-lg inline-block animate-heartbeat">&hearts;</span> e muito café</p>
         </div>
+        <style jsx>{`
+          @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+          }
+        `}</style>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
