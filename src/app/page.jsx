@@ -93,7 +93,7 @@ export default function Home() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full blur opacity-70 group-hover:opacity-100 transition duration-200 animate-pulse"></div>
               <Link 
-                href="/characters" 
+                href="/recipes" 
                 className="relative px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:from-amber-400 hover:to-orange-400 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 text-lg"
               >
                 <span>Explorar Receitas</span>
@@ -183,7 +183,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center">
             <Link 
-              href="/characters" 
+              href="/recipes" 
               className="px-8 py-3 bg-white text-amber-600 font-bold rounded-lg shadow-lg hover:shadow-xl hover:bg-amber-50 transition-all duration-300 text-lg"
             >
               Ver Todas as Receitas
