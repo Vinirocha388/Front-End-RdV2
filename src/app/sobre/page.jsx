@@ -36,12 +36,15 @@ export default function Sobre() {
             </div>
             <div className="relative">
               <div className="aspect-square relative rounded-2xl overflow-hidden shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
-                  <div className="text-white text-8xl">👵</div>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-3xl">❤️</span>
+                <Image
+                  src="/images/vovo.png"
+                  alt="Nossa querida vovó"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{objectFit: 'cover'}}
+                  className="rounded-2xl"
+                  priority
+                />
               </div>
             </div>
           </div>
