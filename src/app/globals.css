@@ -130,3 +130,15 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #d97706; /* amber-600 */
 }
+
+/* Estilos para corrigir problemas com imagens */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Garantir que o SafeImage funcione corretamente */
+.safe-image-container img {
+  background: transparent !important;
+  color: inherit;
+}

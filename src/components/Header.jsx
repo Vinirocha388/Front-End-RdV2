@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -36,57 +36,75 @@ export default function Header() {
         </div>
 
         {/* Menu para tela grande (visível apenas em desktop) */}
-        <nav className="hidden lg:flex">
-          <ul className="flex list-none m-0 p-0 gap-8">
-            <li className="m-0 relative">
-              <Link href="/" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
-                <span className="mr-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                </span>
-                Home
-                <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </Link>
-            </li>
-            <li className="m-0 relative">
-              <Link href="/sobre" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
-                <span className="mr-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
-                Sobre Nós
-                <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </Link>
-            </li>
-            <li className="m-0 relative">
-              <Link href="/recipes" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
-                <span className="mr-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                </span>
-                Receitas
-                <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <div className="hidden lg:flex items-center gap-8">
+          <nav>
+            <ul className="flex list-none m-0 p-0 gap-8">
+              <li className="m-0 relative">
+                <Link href="/" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
+                  <span className="mr-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </span>
+                  Home
+                  <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
+              </li>
+              <li className="m-0 relative">
+                <Link href="/sobre" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
+                  <span className="mr-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                  Sobre Nós
+                  <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
+              </li>
+              <li className="m-0 relative">
+                <Link href="/recipes" className="group flex items-center text-gray-700 no-underline font-medium transition-colors duration-300 text-base relative hover:text-[#ff9f43]">
+                  <span className="mr-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-400 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </span>
+                  Receitas
+                  <span className="absolute -bottom-[3px] left-0 w-full h-[2px] bg-gradient-to-r from-amber-400 to-[#ff9f43] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
-        {/* Botão do menu mobile (visível apenas em mobile) */}
-        <button 
-          className="lg:hidden bg-transparent border-none cursor-pointer w-[35px] h-[35px] sm:w-[30px] sm:h-[30px] relative flex items-center justify-center"
-          onClick={toggleMobileMenu}
-          aria-label="Menu"
-        >
-          <div className="relative w-full h-full overflow-hidden rounded-md hover:bg-amber-50 transition-colors duration-300 flex items-center justify-center group">
-            <span className={`absolute w-[22px] h-[2px] bg-[#ff9f43] rounded-[5px] transition-all duration-300 shadow-sm
-              ${isMobileMenuOpen ? 'bg-transparent' : 'before:content-[""] before:absolute before:w-[22px] before:h-[2px] before:bg-[#ff9f43] before:rounded-[5px] before:shadow-sm before:transition-all before:duration-300 before:transform before:-translate-y-[6px] after:content-[""] after:absolute after:w-[22px] after:h-[2px] after:bg-[#ff9f43] after:rounded-[5px] after:shadow-sm after:transition-all after:duration-300 after:transform after:translate-y-[6px]'}
-              ${isMobileMenuOpen && 'before:transform before:rotate-45 before:translate-y-0 after:transform after:rotate-[-45deg] after:translate-y-0'}`}>
-            </span>
-          </div>
-        </button>
+          {/* Ícone de Login para Desktop */}
+          <Link href="/login" className="group flex items-center justify-center w-10 h-10 rounded-full bg-amber-50 border-2 border-amber-200 transition-all duration-300 hover:border-[#ff9f43] hover:bg-amber-100 hover:scale-105" title="Fazer Login">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </Link>
+        </div>
+
+        {/* Botão do menu mobile e ícone de login (visível apenas em mobile) */}
+        <div className="lg:hidden flex items-center gap-3">
+          {/* Ícone de Login para Mobile */}
+          <Link href="/login" className="group flex items-center justify-center w-[35px] h-[35px] sm:w-[30px] sm:h-[30px] rounded-full bg-amber-50 border-2 border-amber-200 transition-all duration-300 hover:border-[#ff9f43] hover:bg-amber-100" title="Fazer Login">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-amber-500 group-hover:text-[#ff9f43] transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </Link>
+
+          <button 
+            className="bg-transparent border-none cursor-pointer w-[35px] h-[35px] sm:w-[30px] sm:h-[30px] relative flex items-center justify-center"
+            onClick={toggleMobileMenu}
+            aria-label="Menu"
+          >
+            <div className="relative w-full h-full overflow-hidden rounded-md hover:bg-amber-50 transition-colors duration-300 flex items-center justify-center group">
+              <span className={`absolute w-[22px] h-[2px] bg-[#ff9f43] rounded-[5px] transition-all duration-300 shadow-sm
+                ${isMobileMenuOpen ? 'bg-transparent' : 'before:content-[""] before:absolute before:w-[22px] before:h-[2px] before:bg-[#ff9f43] before:rounded-[5px] before:shadow-sm before:transition-all before:duration-300 before:transform before:-translate-y-[6px] after:content-[""] after:absolute after:w-[22px] after:h-[2px] after:bg-[#ff9f43] after:rounded-[5px] after:shadow-sm after:transition-all after:duration-300 after:transform after:translate-y-[6px]'}
+                ${isMobileMenuOpen && 'before:transform before:rotate-45 before:translate-y-0 after:transform after:rotate-[-45deg] after:translate-y-0'}`}>
+              </span>
+            </div>
+          </button>
+        </div>
 
         {/* Menu mobile (exibido apenas quando aberto) */}
         {isMobileMenuOpen && (
@@ -129,7 +147,7 @@ export default function Header() {
                 </li>
                 <li className="m-0 relative">
                   <Link 
-                    href="/characters" 
+                    href="/recipes" 
                     onClick={toggleMobileMenu} 
                     className="flex items-center py-4 px-3 text-gray-800 no-underline font-medium text-base rounded-lg transition-colors duration-200 hover:bg-amber-50 group"
                   >
@@ -139,6 +157,20 @@ export default function Header() {
                       </svg>
                     </span>
                     <span>Receitas</span>
+                  </Link>
+                </li>
+                <li className="m-0 relative border-t border-gray-100 mt-2 pt-2">
+                  <Link 
+                    href="/login"
+                    onClick={toggleMobileMenu} 
+                    className="flex items-center w-full py-4 px-3 text-gray-800 no-underline font-medium text-base rounded-lg transition-colors duration-200 hover:bg-amber-50 group"
+                  >
+                    <span className="flex items-center justify-center w-8 h-8 mr-3 text-amber-500 bg-amber-100 rounded-lg transition-colors duration-200 group-hover:bg-amber-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </span>
+                    <span>Fazer Login</span>
                   </Link>
                 </li>
               </ul>

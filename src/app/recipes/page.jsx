@@ -10,6 +10,7 @@ export default function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dataSource, setDataSource] = useState('api');
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -19,9 +20,13 @@ export default function RecipesPage() {
         
         if (response.success) {
           setRecipes(response.data);
-          // Se for dados de exemplo, podemos adicionar um indicador visual
+          setDataSource(response.source || 'unknown');
+          
+          // Log informativo sobre a fonte dos dados
           if (response.isDemo) {
-            console.log('Usando dados de exemplo - API não disponível');
+            console.log('📝 Usando dados de exemplo - API não disponível');
+          } else {
+            console.log('🌐 Dados carregados da API com sucesso');
           }
         } else {
           setError(response.message);
@@ -73,13 +78,14 @@ export default function RecipesPage() {
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-extrabold text-orange-600 drop-shadow-sm">Receitas da Vovó</h2>
       </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {recipes.map((recipe) => (
           <div key={recipe.id}>
             <Link href={`/recipes/${recipe.id}`}>
               <Card
-                imagem={recipe.image}
-                titulo={recipe.name || recipe.title}
+                imagem={recipe.imagem || recipe.image}
+                titulo={recipe.titulo || recipe.title}
                 descricao={recipe.description || recipe.descricao}
                 ingredientes={recipe.ingredients || recipe.ingredientes}
                 modoPreparo={recipe.instructions || recipe.modoPreparo}

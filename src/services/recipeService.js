@@ -1,33 +1,135 @@
 import { api } from './api';
 
+// Função para normalizar dados da receita
+const normalizeRecipeData = (recipe) => {
+  if (!recipe) return null;
+  
+  return {
+    // IDs
+    id: recipe.id || recipe._id,
+    
+    // Títulos
+    title: recipe.title || recipe.titulo || recipe.name || recipe.nome,
+    titulo: recipe.titulo || recipe.title || recipe.name || recipe.nome,
+    
+    // Descrições
+    description: recipe.description || recipe.descricao || recipe.resumo,
+    descricao: recipe.descricao || recipe.description || recipe.resumo,
+    
+    // Imagens
+    image: recipe.image || recipe.imagem || recipe.foto || recipe.picture,
+    imagem: recipe.imagem || recipe.image || recipe.foto || recipe.picture,
+    
+    // Categorias
+    category: recipe.category || recipe.categoria || recipe.tipo,
+    categoria: recipe.categoria || recipe.category || recipe.tipo,
+    
+    // Ingredientes
+    ingredients: recipe.ingredients || recipe.ingredientes,
+    ingredientes: recipe.ingredientes || recipe.ingredients,
+    
+    // Instruções
+    instructions: recipe.instructions || recipe.modoPreparo || recipe.preparo,
+    modoPreparo: recipe.modoPreparo || recipe.instructions || recipe.preparo,
+    
+    // Informações extras
+    tempoPreparo: recipe.tempoPreparo || recipe.preparationTime || recipe.tempo,
+    porcoes: recipe.porcoes || recipe.servings || recipe.serves,
+    dificuldade: recipe.dificuldade || recipe.difficulty || recipe.level,
+    
+    // Preserva outros campos
+    ...recipe
+  };
+};
+
+// Dados de exemplo apenas como fallback final
+const exampleRecipes = [
+  {
+    id: 1,
+    title: "Bolo da Vovó",
+    titulo: "Bolo da Vovó", 
+    description: "Um bolo tradicional feito com ingredientes simples.",
+    descricao: "Um bolo tradicional feito com ingredientes simples.",
+    image: "/images/image.png",
+    imagem: "/images/image.png",
+    category: "Sobremesas",
+    categoria: "Sobremesas",
+    ingredients: ["2 xícaras de farinha", "3 ovos", "1 xícara de açúcar"],
+    ingredientes: ["2 xícaras de farinha", "3 ovos", "1 xícara de açúcar"],
+    instructions: ["Misture os ingredientes", "Asse por 30 minutos"],
+    modoPreparo: ["Misture os ingredientes", "Asse por 30 minutos"]
+  }
+];
+
 export async function getRecipeById(id) {
   try {
+    console.log(`Buscando receita ${id} da API...`);
     const res = await api.get(`/recipes/${id}`);
+    
+    console.log('Dados brutos da API:', res.data);
+    
+    // Normaliza os dados antes de retornar
+    const normalizedData = normalizeRecipeData(res.data);
+    console.log('Dados normalizados:', normalizedData);
+    
     return {
       success: true,
-      data: res.data
+      data: normalizedData,
+      source: 'api'
     };
   } catch (error) {
-    console.error('Error fetching recipe:', error);
+    console.error('Erro ao buscar receita da API:', error);
+    
+    // Fallback: retorna receita de exemplo apenas se a API falhar
+    const exampleRecipe = exampleRecipes.find(recipe => recipe.id == id);
+    if (exampleRecipe) {
+      console.log('Usando dados de exemplo para receita', id);
+      return {
+        success: true,
+        data: normalizeRecipeData(exampleRecipe),
+        isDemo: true,
+        source: 'fallback'
+      };
+    }
+    
     return {
       success: false,
-      message: error.response?.data?.message || 'Erro ao buscar receita'
+      message: error.response?.data?.message || 'Receita não encontrada'
     };
   }
 }
 
 export async function getAllRecipes() {
   try {
+    console.log('Buscando receitas da API...');
     const res = await api.get('/recipes');
+    
+    console.log('Dados brutos da API:', res.data);
+    
+    // Retorna os dados da API, tentando diferentes estruturas
+    const recipes = res.data.results || res.data.data || res.data;
+    const recipeArray = Array.isArray(recipes) ? recipes : [recipes];
+    
+    // Normaliza cada receita
+    const normalizedRecipes = recipeArray.map(recipe => normalizeRecipeData(recipe));
+    console.log('Receitas normalizadas:', normalizedRecipes);
+    
     return {
       success: true,
-      data: res.data.results || res.data
+      data: normalizedRecipes,
+      source: 'api'
     };
   } catch (error) {
-    console.error('Error fetching recipes:', error);
+    console.error('Erro ao buscar receitas da API:', error);
+    
+    // Fallback: retorna receitas de exemplo apenas se a API falhar
+    console.log('Usando dados de exemplo');
     return {
-      success: false,
-      message: error.response?.data?.message || 'Erro ao buscar receitas'
+      success: true,
+      data: exampleRecipes.map(recipe => normalizeRecipeData(recipe)),
+      isDemo: true,
+      source: 'fallback',
+      message: 'API não disponível - usando dados de exemplo'
     };
   }
 }

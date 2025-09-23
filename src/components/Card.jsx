@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import React from 'react';
+import SafeImage from './SafeImage';
+import React, { useState } from 'react';
 
 export default function Card({ 
   imagem, 
@@ -26,12 +26,13 @@ export default function Card({
         {/* Imagem */}
         {imagem && (
           <div className="w-full h-48 relative rounded-xl mb-4 overflow-hidden border-4 border-white shadow-xl">
-            <Image 
+            <SafeImage 
               src={imagem}
               alt={titulo || 'Receita'}
               fill
+              className="transition-transform duration-300 group-hover:scale-105"
               style={{ objectFit: 'cover' }}
-              className="transition-transform duration-300 group-hover:scale-105" 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           </div>
         )}
