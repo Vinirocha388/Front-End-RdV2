@@ -79,22 +79,20 @@ export default function RecipesPage() {
         <h2 className="text-3xl font-extrabold text-orange-600 drop-shadow-sm">Receitas da Vovó</h2>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="recipe-grid">
         {recipes.map((recipe) => (
-          <div key={recipe.id}>
-            <Link href={`/recipes/${recipe.id}`}>
-              <Card
-                imagem={recipe.imagem || recipe.image}
-                titulo={recipe.titulo || recipe.title}
-                descricao={recipe.description || recipe.descricao}
-                ingredientes={recipe.ingredients || recipe.ingredientes}
-                modoPreparo={recipe.instructions || recipe.modoPreparo}
-                categoria={recipe.category || recipe.categoria}
-                onClick={() => {}}
-                buttonLabel="Ver Receita"
-              />
-            </Link>
-          </div>
+          <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="block h-full">
+            <Card
+              imagem={recipe.imagem || recipe.image}
+              titulo={recipe.titulo || recipe.title}
+              descricao={recipe.description || recipe.descricao}
+              ingredientes={recipe.ingredients || recipe.ingredientes}
+              modoPreparo={recipe.instructions || recipe.modoPreparo}
+              categoria={recipe.category || recipe.categoria}
+              onClick={() => {}}
+              buttonLabel="Ver Receita"
+            />
+          </Link>
         ))}
       </div>
     </section>
