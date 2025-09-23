@@ -14,15 +14,15 @@ export default function Home() {
         <div className="absolute bottom-20 right-20 w-48 h-48 bg-orange-300/15 rounded-full blur-2xl animate-pulse"></div>
         <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-yellow-300/10 rounded-full blur-xl animate-float" style={{animationDelay: '2s'}}></div>
         
-        {/* Decorative food illustrations */}
-        <div className="absolute top-[15%] right-[10%] opacity-20 animate-float" style={{animationDelay: '1s'}}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#92400e" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-            <line x1="6" y1="1" x2="6" y2="4"></line>
-            <line x1="10" y1="1" x2="10" y2="4"></line>
-            <line x1="14" y1="1" x2="14" y2="4"></line>
-          </svg>
+        {/* Decorative vovó illustration */}
+        <div className="absolute top-[15%] right-[10%] opacity-40 animate-float" style={{animationDelay: '1s'}}>
+          <Image 
+            src="/images/vovo2.png" 
+            width={80} 
+            height={80} 
+            alt="Ícone da Vovó Sueli"
+            className="rounded-full shadow-md"
+          />
         </div>
         <div className="absolute bottom-[20%] left-[15%] opacity-20 animate-float" style={{animationDelay: '3s'}}>
           <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#92400e" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -36,8 +36,17 @@ export default function Home() {
           <div className="text-center space-y-6 mb-8 animate-fade-in">
             
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-amber-900 tracking-tight px-4 drop-shadow-sm">
-              Receitinhas da Vovó <span className="animate-wave inline-block">👵</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-amber-900 tracking-tight px-4 drop-shadow-sm flex items-center justify-center gap-3">
+              Receitinhas da Vovó
+              <div className="inline-block w-12 h-12 sm:w-16 sm:h-16 relative">
+                <Image
+                  src="/images/vovo2.png"
+                  fill
+                  style={{objectFit: 'contain'}}
+                  alt="Vovó Sueli"
+                  className="rounded-full"
+                />
+              </div>
             </h1>
             
             <p className="text-lg sm:text-xl md:text-2xl font-medium text-amber-800 tracking-wide px-4 max-w-3xl mx-auto">
