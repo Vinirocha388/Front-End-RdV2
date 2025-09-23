@@ -31,11 +31,10 @@ const Footer = () => {
             <h4 className="text-[#ff9f43] text-lg mb-4 font-semibold">Links Rápidos</h4>
             <ul className="list-none p-0 m-0">
               <li className="mb-2"><Link href="/" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Home</Link></li>
-              <li className="mb-2"><Link href="/characters" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Todas as Receitas</Link></li>
+              <li className="mb-2"><Link href="/recipes" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Todas as Receitas</Link></li>
               <li className="mb-2"><Link href="/sobre" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Sobre Nós</Link></li>
-              <li className="mb-2"><Link href="/apiinfo" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">API Info</Link></li>
-              <li className="mb-2"><Link href="/privacy-policy" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Política de Privacidade</Link></li>
-              <li className="mb-2"><Link href="/terms" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Termos de Uso</Link></li>
+              <li className="mb-2"><Link href="/politicas-de-privacidade" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Política de Privacidade</Link></li>
+              <li className="mb-2"><Link href="/termos-de-uso" className="text-gray-700 no-underline transition-colors duration-300 hover:text-[#ff9f43] hover:underline">Termos de Uso</Link></li>
             </ul>
           </div>
 
