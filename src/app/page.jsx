@@ -14,29 +14,12 @@ export default function Home() {
         <div className="absolute bottom-20 right-20 w-48 h-48 bg-orange-300/15 rounded-full blur-2xl animate-pulse"></div>
         <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-yellow-300/10 rounded-full blur-xl animate-float" style={{animationDelay: '2s'}}></div>
         
-        {/* Decorative vovó illustration */}
-        <div className="absolute top-[15%] right-[10%] opacity-40 animate-float" style={{animationDelay: '1s'}}>
-          <Image 
-            src="/images/vovo2.png" 
-            width={80} 
-            height={80} 
-            alt="Ícone da Vovó Sueli"
-            className="rounded-full shadow-md"
-          />
-        </div>
-        <div className="absolute bottom-[20%] left-[15%] opacity-20 animate-float" style={{animationDelay: '3s'}}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#92400e" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M6 12h.01M12 12h.01M18 12h.01M7 9.5a2.5 2.5 0 0 1 5 0M12 6.5a2.5 2.5 0 0 1 5 0"></path>
-          </svg>
-        </div>
-        
         {/* Hero content */}
         <div className="relative flex flex-col items-center justify-center py-16 px-4 min-h-[85vh]">
           <div className="text-center space-y-6 mb-8 animate-fade-in">
             
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-amber-900 tracking-tight px-4 drop-shadow-sm flex items-center justify-center gap-3">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-amber-900 tracking-tight px-4 drop-shadow-sm flex items-center justify-center gap-3 relative">
               Receitinhas da Vovó
               <div className="inline-block w-12 h-12 sm:w-16 sm:h-16 relative">
                 <Image
@@ -45,6 +28,12 @@ export default function Home() {
                   style={{objectFit: 'contain'}}
                   alt="Vovó Sueli"
                   className="rounded-full"
+                />
+                {/* Botão invisível para admin */}
+                <Link
+                  href="/admin"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                  title="Área Administrativa"
                 />
               </div>
             </h1>
