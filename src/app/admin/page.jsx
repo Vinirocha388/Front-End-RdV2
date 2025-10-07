@@ -15,10 +15,7 @@ export default function AdminPage() {
     category: 'doce',
     image: '',
     ingredients: [''],
-    instructions: [''],
-    tempoPreparo: '',
-    porcoes: '',
-    dificuldade: 'facil'
+    instructions: ['']
   });
 
   // Buscar receitas
@@ -77,10 +74,7 @@ export default function AdminPage() {
       category: 'doce',
       image: '',
       ingredients: [''],
-      instructions: [''],
-      tempoPreparo: '',
-      porcoes: '',
-      dificuldade: 'facil'
+      instructions: ['']
     });
     setShowModal(true);
   };
@@ -89,15 +83,12 @@ export default function AdminPage() {
   const openEditRecipeModal = (recipe) => {
     setEditingRecipe(recipe);
     setFormData({
-      title: recipe.title || '',
-      description: recipe.description || '',
-      category: recipe.category || 'doce',
-      image: recipe.image || '',
-      ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [''],
-      instructions: Array.isArray(recipe.instructions) ? recipe.instructions : [''],
-      tempoPreparo: recipe.tempoPreparo || '',
-      porcoes: recipe.porcoes || '',
-      dificuldade: recipe.dificuldade || 'facil'
+      title: recipe.title || recipe.titulo || '',
+      description: recipe.description || recipe.descricao || '',
+      category: recipe.category || recipe.categoria || 'doce',
+      image: recipe.image || recipe.imagem || '',
+      ingredients: Array.isArray(recipe.ingredients || recipe.ingredientes) ? (recipe.ingredients || recipe.ingredientes) : [''],
+      instructions: Array.isArray(recipe.instructions || recipe.instrucoes) ? (recipe.instructions || recipe.instrucoes) : ['']
     });
     setShowModal(true);
   };
@@ -184,7 +175,6 @@ export default function AdminPage() {
                   <tr className="bg-amber-50">
                     <th className="px-4 py-3 text-left text-amber-900 font-semibold">Título</th>
                     <th className="px-4 py-3 text-left text-amber-900 font-semibold">Categoria</th>
-                    <th className="px-4 py-3 text-left text-amber-900 font-semibold">Dificuldade</th>
                     <th className="px-4 py-3 text-left text-amber-900 font-semibold">Ações</th>
                   </tr>
                 </thead>
@@ -193,23 +183,22 @@ export default function AdminPage() {
                     <tr key={recipe.id} className="border-b hover:bg-amber-25">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          {recipe.image && (
+                          {(recipe.image || recipe.imagem) && (
                             <img
-                              src={recipe.image}
-                              alt={recipe.title}
+                              src={recipe.image || recipe.imagem}
+                              alt={recipe.title || recipe.titulo}
                               className="w-12 h-12 rounded-full object-cover"
                             />
                           )}
                           <div>
-                            <p className="font-medium text-amber-900">{recipe.title}</p>
+                            <p className="font-medium text-amber-900">{recipe.title || recipe.titulo}</p>
                             <p className="text-sm text-amber-700 truncate max-w-xs">
-                              {recipe.description}
+                              {recipe.description || recipe.descricao}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-amber-700 capitalize">{recipe.category}</td>
-                      <td className="px-4 py-3 text-amber-700 capitalize">{recipe.dificuldade || 'N/A'}</td>
+                      <td className="px-4 py-3 text-amber-700 capitalize">{recipe.category || recipe.categoria}</td>
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
                           <button
@@ -321,53 +310,6 @@ export default function AdminPage() {
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
                   />
-                </div>
-
-                {/* Informações adicionais */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">
-                      Tempo de Preparo
-                    </label>
-                    <input
-                      type="text"
-                      name="tempoPreparo"
-                      value={formData.tempoPreparo}
-                      onChange={handleInputChange}
-                      placeholder="ex: 30 minutos"
-                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">
-                      Porções
-                    </label>
-                    <input
-                      type="text"
-                      name="porcoes"
-                      value={formData.porcoes}
-                      onChange={handleInputChange}
-                      placeholder="ex: 4 pessoas"
-                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">
-                      Dificuldade
-                    </label>
-                    <select
-                      name="dificuldade"
-                      value={formData.dificuldade}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    >
-                      <option value="facil">Fácil</option>
-                      <option value="medio">Médio</option>
-                      <option value="dificil">Difícil</option>
-                    </select>
-                  </div>
                 </div>
 
                 {/* Ingredientes */}

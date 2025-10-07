@@ -53,8 +53,43 @@ export default function RecipePage({ params }) {
   const title = recipe.title || recipe.titulo;
   const description = recipe.description || recipe.descricao;
   const image = recipe.image || recipe.imagem;
-  const ingredients = recipe.ingredients || recipe.ingredientes || [];
-  const instructions = recipe.instructions || recipe.modoPreparo || [];
+  
+  // Garantir que ingredientes e instruções sejam arrays
+  let ingredients = recipe.ingredients || recipe.ingredientes || [];
+  if (!Array.isArray(ingredients)) {
+    // Se for string, tentar separar por vírgula ou quebra de linha
+    ingredients = typeof ingredients === 'string' 
+      ? ingredients.split(/[,\n]/).map(item => item.trim()).filter(item => item)
+      : [];
+  }
+  
+  let instructions = recipe.instructions || recipe.modoPreparo || recipe.instrucoes || [];
+  if (!Array.isArray(instructions)) {
+    // Se for string, tentar separar por diferentes padrões
+    if (typeof instructions === 'string') {
+      // Tentar separar por números seguidos de ponto (1. 2. 3. etc)
+      let steps = instructions.split(/\d+\.\s+/).filter(item => item.trim());
+      
+      // Se não encontrou padrão de números, tentar separar por quebra de linha dupla
+      if (steps.length <= 1) {
+        steps = instructions.split(/\n\n+/).filter(item => item.trim());
+      }
+      
+      // Se ainda não separou, tentar por quebra de linha simples
+      if (steps.length <= 1) {
+        steps = instructions.split(/\n/).filter(item => item.trim());
+      }
+      
+      // Se ainda for um único bloco, tentar separar por ponto final seguido de espaço
+      if (steps.length <= 1) {
+        steps = instructions.split(/\.\s+(?=[A-Z])/).map(item => item.trim() + (item.trim().endsWith('.') ? '' : '.')).filter(item => item.length > 1);
+      }
+      
+      instructions = steps;
+    } else {
+      instructions = [];
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-pink-50 p-4">
@@ -142,13 +177,15 @@ export default function RecipePage({ params }) {
                   <h2 className="text-2xl font-bold text-gray-800 mb-4">
                     👩‍🍳 Modo de Preparo
                   </h2>
-                  <ol className="space-y-3">
+                  <ol className="space-y-4">
                     {instructions.map((step, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">
+                        <span className="bg-orange-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
-                        <span className="text-gray-700">{step}</span>
+                        <span className="text-gray-700 leading-relaxed whitespace-pre-line flex-1">
+                          {step}
+                        </span>
                       </li>
                     ))}
                   </ol>
