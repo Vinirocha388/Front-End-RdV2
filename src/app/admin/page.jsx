@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getAllRecipes, createRecipe, updateRecipe, deleteRecipe } from '@/services/recipeService';
+import { api } from '@/services/api';
 
 export default function AdminPage() {
   const [recipes, setRecipes] = useState([]);
@@ -23,18 +23,16 @@ export default function AdminPage() {
 
   // Buscar receitas
   useEffect(() => {
-    fetchRecipes();
+    getRecipes();
   }, []);
 
-  const fetchRecipes = async () => {
+  const getRecipes = async () => {
     try {
-      setLoading(true);
-      const response = await getAllRecipes();
-      if (response.success) {
-        setRecipes(response.data);
-      }
+      const response = await api.get('/recipes');
+      const data = response.data.results || response.data;
+      setRecipes(data);
     } catch (error) {
-      console.error('Erro ao buscar receitas:', error);
+      console.log('Erro:', error);
     } finally {
       setLoading(false);
     }
@@ -115,46 +113,30 @@ export default function AdminPage() {
         instructions: formData.instructions.filter(item => item.trim() !== '')
       };
 
-      let response;
       if (editingRecipe) {
-        response = await updateRecipe(editingRecipe.id, recipeData);
+        await api.put(`/recipes/${editingRecipe.id}`, recipeData);
       } else {
-        response = await createRecipe(recipeData);
+        await api.post('/recipes', recipeData);
       }
 
-      if (response.success) {
-        await fetchRecipes();
-        setShowModal(false);
-        const action = editingRecipe ? 'atualizada' : 'criada';
-        const message = response.isDemo 
-          ? `Receita ${action} com sucesso! (Modo de demonstração - não salva permanentemente)`
-          : `Receita ${action} com sucesso!`;
-        alert(message);
-      } else {
-        alert('Erro ao salvar receita: ' + response.message);
-      }
+      await getRecipes();
+      setShowModal(false);
+      alert(editingRecipe ? 'Receita atualizada!' : 'Receita criada!');
     } catch (error) {
-      console.error('Erro ao salvar receita:', error);
+      console.log('Erro ao salvar:', error);
       alert('Erro ao salvar receita');
     }
   };
 
   // Excluir receita
   const handleDelete = async (recipeId) => {
-    if (window.confirm('Tem certeza que deseja excluir esta receita?')) {
+    if (window.confirm('Tem certeza que deseja excluir?')) {
       try {
-        const response = await deleteRecipe(recipeId);
-        if (response.success) {
-          await fetchRecipes();
-          const message = response.isDemo 
-            ? 'Receita excluída com sucesso! (Modo de demonstração - não salva permanentemente)'
-            : 'Receita excluída com sucesso!';
-          alert(message);
-        } else {
-          alert('Erro ao excluir receita: ' + response.message);
-        }
+        await api.delete(`/recipes/${recipeId}`);
+        await getRecipes();
+        alert('Receita excluída!');
       } catch (error) {
-        console.error('Erro ao excluir receita:', error);
+        console.log('Erro ao excluir:', error);
         alert('Erro ao excluir receita');
       }
     }
@@ -163,17 +145,11 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-100 to-amber-200 py-8">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-amber-900">Painel Administrativo</h1>
               <p className="text-amber-700 mt-2">Gerencie as receitas da Vovó</p>
-              <div className="mt-2 p-2 bg-blue-100 border border-blue-300 rounded-lg">
-                <p className="text-sm text-blue-800">
-                  <span className="font-semibold">Modo de Demonstração:</span> As alterações são simuladas e não são salvas permanentemente.
-                </p>
-              </div>
             </div>
             <div className="flex gap-4">
               <Link
