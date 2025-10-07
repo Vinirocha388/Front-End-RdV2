@@ -2,7 +2,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { api } from '@/services/api';
 import Card from '@/components/Card';
 import Link from 'next/link';
 
@@ -18,8 +17,9 @@ export default function RecipesPage() {
   useEffect(() => {
     async function getRecipes() {
       try {
-        const response = await api.get('/recipes');
-        const data = response.data.results || response.data;
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+        const result = await response.json();
+        const data = result.results || result;
         setRecipes(data);
         setFilteredRecipes(data);
       } catch (error) {

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { api } from '@/services/api';
 
 export default function AdminPage() {
   const [recipes, setRecipes] = useState([]);
@@ -25,8 +24,9 @@ export default function AdminPage() {
 
   const getRecipes = async () => {
     try {
-      const response = await api.get('/recipes');
-      const data = response.data.results || response.data;
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+      const result = await response.json();
+      const data = result.results || result;
       setRecipes(data);
     } catch (error) {
       console.log('Erro:', error);
@@ -105,9 +105,21 @@ export default function AdminPage() {
       };
 
       if (editingRecipe) {
-        await api.put(`/recipes/${editingRecipe.id}`, recipeData);
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${editingRecipe.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(recipeData),
+        });
       } else {
-        await api.post('/recipes', recipeData);
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(recipeData),
+        });
       }
 
       await getRecipes();
@@ -123,7 +135,9 @@ export default function AdminPage() {
   const handleDelete = async (recipeId) => {
     if (window.confirm('Tem certeza que deseja excluir?')) {
       try {
-        await api.delete(`/recipes/${recipeId}`);
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${recipeId}`, {
+          method: 'DELETE',
+        });
         await getRecipes();
         alert('Receita excluída!');
       } catch (error) {

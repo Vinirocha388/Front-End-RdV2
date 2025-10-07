@@ -2,7 +2,6 @@
 
 import { useEffect, useState, use } from 'react';
 import SafeImage from '@/components/SafeImage';
-import { getRecipeById } from '@/services/recipeService';
 
 export default function RecipePage({ params }) {
   const { id } = use(params);
@@ -13,10 +12,9 @@ export default function RecipePage({ params }) {
   useEffect(() => {
     async function getRecipe() {
       try {
-        const response = await getRecipeById(id);
-        if (response.success) {
-          setRecipe(response.data);
-        }
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}`);
+        const result = await response.json();
+        setRecipe(result);
       } catch (error) {
         console.log('Erro:', error);
       } finally {
