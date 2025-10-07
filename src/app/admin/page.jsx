@@ -278,8 +278,6 @@ export default function AdminPage() {
                       <option value="doce">Doce</option>
                       <option value="salgado">Salgado</option>
                       <option value="bebida">Bebida</option>
-                      <option value="prato-principal">Prato Principal</option>
-                      <option value="entrada">Entrada</option>
                       <option value="sobremesa">Sobremesa</option>
                     </select>
                   </div>
