@@ -24,12 +24,20 @@ export default function AdminPage() {
 
   const getRecipes = async () => {
     try {
+      console.log('Buscando receitas...');
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+      
+      if (!response.ok) {
+        console.error('Erro ao buscar receitas:', response.status);
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      
       const result = await response.json();
       const data = result.results || result;
+      console.log('Receitas carregadas:', data.length);
       setRecipes(data);
     } catch (error) {
-      console.log('Erro:', error);
+      console.error('Erro ao buscar receitas:', error);
     } finally {
       setLoading(false);
     }
@@ -93,10 +101,20 @@ export default function AdminPage() {
     setShowModal(true);
   };
 
-  // Salvar receita
+  // Salvar receita com PUT (atualização completa)
   const handleSave = async (e) => {
     e.preventDefault();
-    
+    await saveRecipe('PUT');
+  };
+
+  // Salvar receita com PATCH (atualização parcial)
+  const handlePatch = async (e) => {
+    e.preventDefault();
+    await saveRecipe('PATCH');
+  };
+
+  // Função genérica para salvar com PUT ou PATCH
+  const saveRecipe = async (method = 'PUT') => {
     try {
       const recipeData = {
         ...formData,
@@ -104,16 +122,20 @@ export default function AdminPage() {
         instructions: formData.instructions.filter(item => item.trim() !== '')
       };
 
+      let response;
+      
       if (editingRecipe) {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${editingRecipe.id}`, {
-          method: 'PUT',
+        console.log(`Atualizando receita com ${method}:`, editingRecipe.id, recipeData);
+        response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${editingRecipe.id}`, {
+          method: method,
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(recipeData),
         });
       } else {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`, {
+        console.log('Criando nova receita:', recipeData);
+        response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -122,12 +144,22 @@ export default function AdminPage() {
         });
       }
 
+      // Verificar se a resposta foi bem-sucedida
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Erro na resposta:', response.status, errorText);
+        throw new Error(`Erro HTTP ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('Resposta do servidor:', result);
+
       await getRecipes();
       setShowModal(false);
-      alert(editingRecipe ? 'Receita atualizada!' : 'Receita criada!');
+      alert(editingRecipe ? `Receita atualizada com sucesso! (${method})` : 'Receita criada com sucesso!');
     } catch (error) {
-      console.log('Erro ao salvar:', error);
-      alert('Erro ao salvar receita');
+      console.error('Erro ao salvar receita:', error);
+      alert(`Erro ao salvar receita: ${error.message}`);
     }
   };
 
@@ -135,15 +167,42 @@ export default function AdminPage() {
   const handleDelete = async (recipeId) => {
     if (window.confirm('Tem certeza que deseja excluir?')) {
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${recipeId}`, {
+        console.log('Excluindo receita:', recipeId);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${recipeId}`, {
           method: 'DELETE',
         });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Erro ao excluir:', response.status, errorText);
+          throw new Error(`Erro HTTP ${response.status}: ${errorText}`);
+        }
+        
+        console.log('Receita excluída com sucesso');
         await getRecipes();
-        alert('Receita excluída!');
+        alert('Receita excluída com sucesso!');
       } catch (error) {
-        console.log('Erro ao excluir:', error);
-        alert('Erro ao excluir receita');
+        console.error('Erro ao excluir receita:', error);
+        alert(`Erro ao excluir receita: ${error.message}`);
       }
+    }
+  };
+
+  // Função para editar receita diretamente (atalho)
+  const handleQuickEdit = async (recipeId, field, value) => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes/${recipeId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ [field]: value }),
+      });
+      await getRecipes();
+      alert('Receita atualizada!');
+    } catch (error) {
+      console.log('Erro ao editar:', error);
+      alert('Erro ao editar receita');
     }
   };
 
@@ -292,7 +351,6 @@ export default function AdminPage() {
                       <option value="doce">Doce</option>
                       <option value="salgado">Salgado</option>
                       <option value="bebida">Bebida</option>
-                      <option value="sobremesa">Sobremesa</option>
                     </select>
                   </div>
                 </div>
@@ -400,12 +458,33 @@ export default function AdminPage() {
                   >
                     Cancelar
                   </button>
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
-                  >
-                    {editingRecipe ? 'Atualizar' : 'Criar'} Receita
-                  </button>
+                  
+                  {editingRecipe ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={handlePatch}
+                        className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                        title="Atualização parcial - PATCH"
+                      >
+                        Atualizar (PATCH)
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+                        title="Atualização completa - PUT"
+                      >
+                        Atualizar (PUT)
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+                    >
+                      Criar Receita
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
