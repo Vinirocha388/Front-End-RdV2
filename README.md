@@ -41,8 +41,12 @@ npm install
 yarn install
 ```
 
+3. Crie o arquivo (`.env`):
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
 
-3. Inicie o servidor de desenvolvimento:
+4. Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 # ou
